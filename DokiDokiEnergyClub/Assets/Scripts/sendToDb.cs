@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Text;
 
-public class Sendtodb
+public class Sendtodb : MonoBehaviour
 {
     private string _apiUrl;
 
