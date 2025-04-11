@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Text;
 
-public class sendtodb
+public class Sendtodb
 {
-    private string apiUrl;
+    private string ApiUrl;
 
-    public sendtodb()
+    public Sendtodb()
     {
         // Replace with your backend service URL
-        apiUrl = "http://localhost:3000/data";
+        ApiUrl = "http://localhost:3000/data";
     }
 
     public void SendData<T>(string collectionName, T data)
@@ -27,7 +27,7 @@ public class sendtodb
 
     private async void SendDataToServer(string jsonData)
     {
-        using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(ApiUrl, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
