@@ -4,12 +4,12 @@ using System.Text;
 
 public class Sendtodb
 {
-    private string ApiUrl;
+    private string _apiUrl;
 
     public Sendtodb()
     {
         // Replace with your backend service URL
-        ApiUrl = "http://localhost:3000/data";
+        _apiUrl = "http://localhost:3000/data";
     }
 
     public void SendData<T>(string collectionName, T data)
@@ -27,7 +27,7 @@ public class Sendtodb
 
     private async void SendDataToServer(string jsonData)
     {
-        using (UnityWebRequest request = new UnityWebRequest(ApiUrl, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(_apiUrl, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
