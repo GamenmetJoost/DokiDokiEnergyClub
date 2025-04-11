@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8655533435708710923}
   - component: {fileID: 7489660364595550659}
+  - component: {fileID: 7059036604518247509}
   m_Layer: 0
   m_Name: CoalPlant
   m_TagString: Untagged
@@ -87,3 +88,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7059036604518247509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120585674599081584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9bd5de3bf47094bb46843aa5175575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeAmount: 40
+  addInterval: 2
