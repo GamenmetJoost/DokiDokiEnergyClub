@@ -568,7 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b4d9e2da8025846aa55c0e8600e00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagePrefab: {fileID: 7523214264496222218, guid: 85a54e71338156f4387305ac7663cf35, type: 3}
+  imagePrefab: {fileID: 1120585674599081584, guid: 976dd48f62bfaac448f563a597702bff, type: 3}
   tileWidth: 3.2
   tileHeight: 1.6
 --- !u!1 &519420028
@@ -1218,6 +1218,7 @@ GameObject:
   - component: {fileID: 1377910797}
   - component: {fileID: 1377910796}
   - component: {fileID: 1377910795}
+  - component: {fileID: 1377910798}
   m_Layer: 5
   m_Name: Kolencentrale
   m_TagString: Untagged
@@ -1287,7 +1288,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1377910796}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1377910798}
+        m_TargetAssemblyTypeName: ImagePlacer, Assembly-CSharp
+        m_MethodName: StartPlacing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1377910796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,6 +1339,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377910793}
   m_CullTransparentMesh: 1
+--- !u!114 &1377910798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377910793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b4d9e2da8025846aa55c0e8600e00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imagePrefab: {fileID: 1120585674599081584, guid: 976dd48f62bfaac448f563a597702bff, type: 3}
+  tileWidth: 3.2
+  tileHeight: 1.6
 --- !u!1 &1408143609
 GameObject:
   m_ObjectHideFlags: 0
