@@ -17,7 +17,7 @@ public class GetDataFromDb : MonoBehaviour
     public GetDataFromDb()
     {
         // Replace with your backend service URL
-        _apiUrl = "http://38.242.134.8:5001/data";
+        _apiUrl = "https://mongodb.mirovaassen.nl";
         _localFilePath = Path.Combine(Application.persistentDataPath, "unsentData.json");
         Debug.Log("Local JSON file path: " + _localFilePath);
     }
@@ -26,11 +26,11 @@ public class GetDataFromDb : MonoBehaviour
     {
         if (string.IsNullOrEmpty(collectionName))
         {
-            Debug.LogError("Collection name is required.");
-            return null;
+            Debug.LogWarning("Collection name is empty. Using default test endpoint.");
+            collectionName = "test"; // Default to "test" collection
         }
 
-        string url = $"{_apiUrl}/{collectionName}";
+        string url = $"{_apiUrl}/data/{collectionName}";
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             request.SetRequestHeader("Content-Type", "application/json");
