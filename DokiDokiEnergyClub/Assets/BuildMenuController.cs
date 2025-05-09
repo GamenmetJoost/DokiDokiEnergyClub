@@ -17,6 +17,7 @@ public class BuildMenuController : MonoBehaviour
             openMenuButton.onClick.AddListener(ToggleBuildMenu);
     }
 
+
     void ToggleBuildMenu()
     {
         if (buildMenu != null)
