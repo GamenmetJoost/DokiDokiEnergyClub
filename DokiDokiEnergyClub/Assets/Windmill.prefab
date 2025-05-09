@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8638899000961769030}
   - component: {fileID: 903319042591654511}
   - component: {fileID: 8632094649202430792}
+  - component: {fileID: 4405498429758849632}
   m_Layer: 0
   m_Name: Windmill
   m_TagString: Untagged
@@ -102,3 +103,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeAmount: 5
   addInterval: 2
+--- !u!114 &4405498429758849632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337470031402722488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05819c64e4fe1748819e2fe0deb6950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeAmount: -1
+  addInterval: 1
