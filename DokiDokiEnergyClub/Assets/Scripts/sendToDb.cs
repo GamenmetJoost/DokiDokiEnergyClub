@@ -1,3 +1,9 @@
+// ============================================================
+// Created by: Miro Vaassen
+// File: sendToDb.cs
+// Description: Handles sending data to the database.
+// ============================================================
+
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Text;
