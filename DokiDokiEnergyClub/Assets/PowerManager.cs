@@ -5,7 +5,7 @@ public class PowerManager : MonoBehaviour
 {
     public static PowerManager Instance; // Singleton pattern
 
-    [SerializeField] private int currentValue = 0;
+    [SerializeField] private int power = 0;
     [SerializeField] private Text displayText;
 
     void Awake()
@@ -27,23 +27,23 @@ public class PowerManager : MonoBehaviour
         // Update display text every frame
         if (displayText != null)
         {
-            displayText.text = $"Power: {currentValue}";
+            displayText.text = $"Power: {power}";
         }
     }
 
     public void AddToValue(int amount)
     {
-        currentValue += amount;
+        power += amount;
     }
 
     public void SubtractFromValue(int amount)
     {
-        currentValue -= amount;
+        power -= amount;
     }
 
     // For external access to the current value
     public int GetCurrentValue()
     {
-        return currentValue;
+        return power;
     }
 }
