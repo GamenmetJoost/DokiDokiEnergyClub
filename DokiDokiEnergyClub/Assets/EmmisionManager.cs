@@ -5,7 +5,7 @@ public class EmissionManager : MonoBehaviour
 {
     public static EmissionManager Instance;
 
-    [SerializeField] private int emission = 0;
+    [SerializeField] public int emission = 0;
     [SerializeField] private Text displayText;
 
     private Camera mainCamera;

@@ -5,7 +5,7 @@ public class PowerManager : MonoBehaviour
 {
     public static PowerManager Instance; // Singleton pattern
 
-    [SerializeField] private int power = 0;
+    [SerializeField] public int power = 0;
     [SerializeField] private Text displayText;
 
     void Awake()
