@@ -19,6 +19,7 @@ public class GetDataFromDb : MonoBehaviour
         // Replace with your backend service URL
         _apiUrl = "http://38.242.134.8:5001/data";
         _localFilePath = Path.Combine(Application.persistentDataPath, "unsentData.json");
+        Debug.Log("Local JSON file path: " + _localFilePath);
     }
 
     public async Task<string> FetchData(string collectionName)
