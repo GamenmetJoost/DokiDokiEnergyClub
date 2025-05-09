@@ -28,6 +28,7 @@ public class MoneyManager : MonoBehaviour
         mainCamera = Camera.main;
     }
 
+
     void Update()
     {
         if (displayText != null)
