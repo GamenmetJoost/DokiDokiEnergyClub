@@ -8,6 +8,7 @@ using UnityEngine;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 public class checkJson : MonoBehaviour
 {
@@ -18,6 +19,30 @@ public class checkJson : MonoBehaviour
         // Set the file path to the JSON file
         _filePath = Path.Combine(Application.persistentDataPath, "localData.json");
         Debug.Log("JSON file path: " + _filePath);
+
+        if (!File.Exists(_filePath))
+        {
+            Debug.LogWarning("Local JSON file not found. Attempting to fetch data from the database...");
+            // Add logic to fetch data from the database and save it locally
+            FetchAndSaveDataFromDb();
+        }
+    }
+
+    private async void FetchAndSaveDataFromDb()
+    {
+        // Example logic to fetch data from the database
+        GetDataFromDb dbFetcher = new GetDataFromDb();
+        string jsonData = await dbFetcher.FetchData("users");
+
+        if (!string.IsNullOrEmpty(jsonData))
+        {
+            File.WriteAllText(_filePath, jsonData);
+            Debug.Log("Fetched data from DB and saved locally.");
+        }
+        else
+        {
+            Debug.LogError("Failed to fetch data from the database.");
+        }
     }
 
     public bool CheckUser(string username, string userId)

@@ -31,7 +31,10 @@ public class Sendtodb : MonoBehaviour
         };
 
         string jsonData = JsonUtility.ToJson(payload);
-        Debug.Log("Sending data: " + jsonData);
+        Debug.Log("Saving data locally before sending to the server.");
+        SaveDataLocally(jsonData);
+
+        Debug.Log("Attempting to send data to the server.");
         SendDataToServer(jsonData);
     }
 

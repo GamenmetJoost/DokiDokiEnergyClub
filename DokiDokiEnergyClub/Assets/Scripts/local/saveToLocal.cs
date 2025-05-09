@@ -11,6 +11,13 @@ public class saveToLocal : MonoBehaviour
 {
     private string _filePath;
 
+    // New variables
+    private string Money;
+    private int Electricity;
+    private float Polution;
+    private bool X;
+    private string Y;
+
     void Start()
     {
         // Set the file path to save the JSON locally
@@ -53,5 +60,14 @@ public class saveToLocal : MonoBehaviour
             Debug.LogError("Error loading data from JSON: " + ex.Message);
             return default;
         }
+    }
+
+    public void SaveAndSyncData<T>(T data)
+    {
+        SaveDataToJson(data);
+
+        // Example logic to sync local data to the database
+        Sendtodb dbSender = new Sendtodb();
+        dbSender.SendData("users", data);
     }
 }
