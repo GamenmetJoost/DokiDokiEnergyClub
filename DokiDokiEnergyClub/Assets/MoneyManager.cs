@@ -33,20 +33,9 @@ public class MoneyManager : MonoBehaviour
     {
         if (displayText != null)
         {
-            displayText.text = $"money: {money}";
+            displayText.text = $"Money: {money}";
         }
 
-        UpdateBackgroundColor();
-    }
-
-    private void UpdateBackgroundColor()
-    {
-        if (mainCamera == null) return;
-
-        // Map pollution from 0 (green) to 100 (red)
-        float t = Mathf.Clamp01(money / 2000f);
-        Color backgroundColor = Color.Lerp(Color.green, Color.red, t);
-        mainCamera.backgroundColor = backgroundColor;
     }
 
     public void AddToValue(int amount)
