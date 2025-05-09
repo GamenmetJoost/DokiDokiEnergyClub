@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 269f20d6ee177f44e97c453fb3a0899b
+guid: a76a60a62dd6a5246a2867253a9a4837
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2952564868547622667
-    second: Upgrade_0
+      213: 1603538757093871025
+    second: Windmill_prototype-2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -97,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -126,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Upgrade_0
+      name: Windmill_prototype-2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 400
-        height: 400
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 11
+        y: 6
+        width: 44
+        height: 90
+      alignment: 9
+      pivot: {x: 0.4850724, y: 0.020000001}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b073416ca1e99f820800000000000000
-      internalID: 2952564868547622667
+      spriteID: 1bdc620f00ae04610800000000000000
+      internalID: 1603538757093871025
       vertices: []
       indices: 
       edges: []
@@ -151,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b5b2e27a914f9eb43bb17503b3f8cca1
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Upgrade_0: 2952564868547622667
+      Windmill_prototype-2_0: 1603538757093871025
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
