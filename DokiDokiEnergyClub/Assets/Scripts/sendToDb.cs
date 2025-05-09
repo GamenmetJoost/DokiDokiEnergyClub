@@ -9,7 +9,7 @@ public class Sendtodb : MonoBehaviour
     public Sendtodb()
     {
         // Replace with your backend service URL
-        _apiUrl = "http://localhost:5001/data";
+        _apiUrl = "http://38.242.134.8:5001/data";
     }
 
     public void SendData<T>(string collectionName, T data)
