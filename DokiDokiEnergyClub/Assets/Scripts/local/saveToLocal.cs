@@ -12,9 +12,9 @@ public class saveToLocal : MonoBehaviour
     private string _filePath;
 
     // New variables
-    private string Money;
+    private int Money;
     private int Electricity;
-    private float Polution;
+    private int Polution;
     private bool X;
     private string Y;
 
@@ -23,12 +23,29 @@ public class saveToLocal : MonoBehaviour
         // Set the file path to save the JSON locally
         _filePath = Path.Combine(Application.persistentDataPath, "localData.json");
         Debug.Log("Local JSON file path: " + _filePath);
+
+        // Initialize variables
+        Money = MoneyManager.Instance.GetCurrentValue();
+        Electricity = PowerManager.Instance.GetCurrentValue();
+        Polution = EmissionManager.Instance.GetCurrentValue();
+        X = true; // Example value
+        Y = "ExampleString"; // Example value
     }
 
-    public void SaveDataToJson<T>(T data)
+    public void SaveDataToJson()
     {
         try
         {
+            // Create an object to store the variables
+            var data = new
+            {
+                Money,
+                Electricity,
+                Polution,
+                X,
+                Y
+            };
+
             string jsonData = JsonUtility.ToJson(data, true);
             File.WriteAllText(_filePath, jsonData);
             Debug.Log("Data saved locally to JSON: " + jsonData);
@@ -62,11 +79,20 @@ public class saveToLocal : MonoBehaviour
         }
     }
 
-    public void SaveAndSyncData<T>(T data)
+    public void SaveAndSyncData()
     {
-        SaveDataToJson(data);
+        SaveDataToJson();
 
-        // Example logic to sync local data to the database
+        // Sync local data to the database
+        var data = new
+        {
+            Money,
+            Electricity,
+            Polution,
+            X,
+            Y
+        };
+
         Sendtodb dbSender = new Sendtodb();
         dbSender.SendData("users", data);
     }
