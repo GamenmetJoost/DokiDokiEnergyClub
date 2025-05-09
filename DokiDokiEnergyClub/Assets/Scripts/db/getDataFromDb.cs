@@ -7,15 +7,18 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
+using System.IO;
 
 public class GetDataFromDb : MonoBehaviour
 {
     private string _apiUrl;
+    private string _localFilePath;
 
     public GetDataFromDb()
     {
         // Replace with your backend service URL
         _apiUrl = "http://38.242.134.8:5001/data";
+        _localFilePath = Path.Combine(Application.persistentDataPath, "unsentData.json");
     }
 
     public async Task<string> FetchData(string collectionName)
@@ -44,8 +47,31 @@ public class GetDataFromDb : MonoBehaviour
             else
             {
                 Debug.LogError("Error fetching data: " + request.error);
+                return LoadDataLocally();
+            }
+        }
+    }
+
+    private string LoadDataLocally()
+    {
+        try
+        {
+            if (File.Exists(_localFilePath))
+            {
+                string jsonData = File.ReadAllText(_localFilePath);
+                Debug.Log("Loaded local data: " + jsonData);
+                return jsonData;
+            }
+            else
+            {
+                Debug.LogWarning("No local data file found.");
                 return null;
             }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error loading local data: " + ex.Message);
+            return null;
         }
     }
 }

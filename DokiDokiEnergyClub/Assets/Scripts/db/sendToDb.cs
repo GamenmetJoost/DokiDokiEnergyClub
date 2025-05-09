@@ -7,15 +7,18 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Text;
+using System.IO;
 
 public class Sendtodb : MonoBehaviour
 {
     private string _apiUrl;
+    private string _localFilePath;
 
     public Sendtodb()
     {
         // Replace with your backend service URL
         _apiUrl = "http://38.242.134.8:5001/data";
+        _localFilePath = Path.Combine(Application.persistentDataPath, "unsentData.json");
     }
 
     public void SendData<T>(string collectionName, T data)
@@ -52,7 +55,21 @@ public class Sendtodb : MonoBehaviour
             else
             {
                 Debug.LogError("Error sending data: " + request.error);
+                SaveDataLocally(jsonData);
             }
+        }
+    }
+
+    private void SaveDataLocally(string jsonData)
+    {
+        try
+        {
+            File.WriteAllText(_localFilePath, jsonData);
+            Debug.Log("Data saved locally due to failed server request.");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error saving data locally: " + ex.Message);
         }
     }
 }
