@@ -24,4 +24,14 @@ public class emmisionAmount : MonoBehaviour
             timer = 0f; // Reset timer
         }
     }
+
+    public void SetPollutionOutput(float newOutput)
+    {
+        changeAmount = (int)newOutput;
+    }
+
+    public float GetPollutionOutput()
+    {
+        return changeAmount;
+    }
 }
