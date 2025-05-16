@@ -22,25 +22,51 @@ public class Sendtodb : MonoBehaviour
         Debug.Log("Local JSON file path: " + _localFilePath);
     }
 
-    public void SendData<T>(string collectionName, T data)
+    [System.Serializable]
+    public class UserDataPayload
     {
-        var payload = new
+        public int money;
+        public int electricity;
+        public int polution;
+        public bool x;
+        public string y;
+    }
+
+    [System.Serializable]
+    public class DbPayload
+    {
+        public string collectionName;
+        public UserDataPayload data;
+    }
+
+    public void SendData(string collectionName, UserDataPayload data)
+    {
+        // Altijd posten naar /data endpoint
+        string url = _apiUrl; // _apiUrl = "https://mongodb.mirovaassen.nl/data"
+        var payload = new DbPayload
         {
             collectionName = collectionName,
             data = data
         };
 
-        string jsonData = JsonUtility.ToJson(payload);
-        Debug.Log("Saving data locally before sending to the server.");
+        // Log de payload als object
+        Debug.Log("Payload object:");
+        Debug.Log($"collectionName: {payload.collectionName}");
+        Debug.Log($"data.money: {payload.data.money}, data.electricity: {payload.data.electricity}, data.polution: {payload.data.polution}, data.x: {payload.data.x}, data.y: {payload.data.y}");
+
+        string jsonData = JsonUtility.ToJson(payload, true);
+        Debug.Log("JSON that will be sent to the server:");
+        Debug.Log(jsonData);
+
         SaveDataLocally(jsonData);
 
         Debug.Log("Attempting to send data to the server.");
-        SendDataToServer(jsonData);
+        SendDataToServer(url, jsonData);
     }
 
-    private async void SendDataToServer(string jsonData)
+    private async void SendDataToServer(string url, string jsonData)
     {
-        using (UnityWebRequest request = new UnityWebRequest(_apiUrl, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);

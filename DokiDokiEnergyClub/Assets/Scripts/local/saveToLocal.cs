@@ -34,17 +34,22 @@ public class saveToLocal : MonoBehaviour
 
     public void SaveDataToJson()
     {
+        Money = MoneyManager.Instance.GetCurrentValue();
+        Electricity = PowerManager.Instance.GetCurrentValue();
+        Polution = EmissionManager.Instance.GetCurrentValue();
+        X = true; // Example value
+        Y = "ExampleString"; // Example value
         try
         {
-            // Create an object to store the variables
-            var data = new
+            var data = new Sendtodb.UserDataPayload
             {
-                Money,
-                Electricity,
-                Polution,
-                X,
-                Y
+                money = Money,
+                electricity = Electricity,
+                polution = Polution,
+                x = X,
+                y = Y
             };
+            Debug.Log("Saving data to JSON: " + JsonUtility.ToJson(data, true));
 
             string jsonData = JsonUtility.ToJson(data, true);
             File.WriteAllText(_filePath, jsonData);
@@ -83,17 +88,20 @@ public class saveToLocal : MonoBehaviour
     {
         SaveDataToJson();
 
-        // Sync local data to the database
-        var data = new
+        var data = new Sendtodb.UserDataPayload
         {
-            Money,
-            Electricity,
-            Polution,
-            X,
-            Y
+            money = Money,
+            electricity = Electricity,
+            polution = Polution,
+            x = X,
+            y = Y
         };
 
         Sendtodb dbSender = new Sendtodb();
-        dbSender.SendData("users", data);
+        dbSender.SendData("users", data); // "users" is de collectionName
     }
 }
+
+// ============================================================
+// Gemaakt door: Miro Vaassen
+// ============================================================
