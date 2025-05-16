@@ -6,10 +6,12 @@
 
 using UnityEngine;
 using System.IO;
+using System;
 
 public class saveToLocal : MonoBehaviour
 {
     private string _filePath;
+    private string _userId;
 
     // New variables
     private int Money;
@@ -18,13 +20,30 @@ public class saveToLocal : MonoBehaviour
     private bool X;
     private string Y;
 
+    [System.Serializable]
+    private class SaveFileData
+    {
+        public string userId;
+        public int money;
+        public int electricity;
+        public int polution;
+        public bool x;
+        public string y;
+    }
+
     void Start()
     {
         // Set the file path to save the JSON locally
         _filePath = Path.Combine(Application.persistentDataPath, "localData.json");
         Debug.Log("Local JSON file path: " + _filePath);
 
-        // Initialize variables
+        // Try to load userId from file, else generate and save
+        LoadOrCreateUserId();
+
+        // Load saved values and set them in the managers
+        LoadStatsFromSave();
+
+        // Initialize variables (optional, will be overwritten by LoadStatsFromSave if file exists)
         Money = MoneyManager.Instance.GetCurrentValue();
         Electricity = PowerManager.Instance.GetCurrentValue();
         Polution = EmissionManager.Instance.GetCurrentValue();
@@ -32,19 +51,66 @@ public class saveToLocal : MonoBehaviour
         Y = "ExampleString"; // Example value
     }
 
+    private void LoadOrCreateUserId()
+    {
+        if (File.Exists(_filePath))
+        {
+            string jsonData = File.ReadAllText(_filePath);
+            SaveFileData loaded = JsonUtility.FromJson<SaveFileData>(jsonData);
+            if (!string.IsNullOrEmpty(loaded.userId))
+            {
+                _userId = loaded.userId;
+                Debug.Log("Loaded userId from file: " + _userId);
+                return;
+            }
+        }
+        // Generate new userId
+        _userId = Guid.NewGuid().ToString();
+        Debug.Log("Generated new userId: " + _userId);
+        // Save immediately so it's persisted
+        SaveDataToJson();
+    }
+
+    private void LoadStatsFromSave()
+    {
+        if (File.Exists(_filePath))
+        {
+            string jsonData = File.ReadAllText(_filePath);
+            SaveFileData loaded = JsonUtility.FromJson<SaveFileData>(jsonData);
+            if (loaded != null)
+            {
+                // Set values in managers if possible
+                if (MoneyManager.Instance != null)
+                    MoneyManager.Instance.money = loaded.money;
+                if (PowerManager.Instance != null)
+                    PowerManager.Instance.power = loaded.electricity;
+                if (EmissionManager.Instance != null)
+                    EmissionManager.Instance.emission = loaded.polution;
+
+                Debug.Log($"Loaded stats from save: money={loaded.money}, electricity={loaded.electricity}, polution={loaded.polution}");
+            }
+        }
+    }
+
     public void SaveDataToJson()
     {
+        Money = MoneyManager.Instance.GetCurrentValue();
+        Electricity = PowerManager.Instance.GetCurrentValue();
+        Polution = EmissionManager.Instance.GetCurrentValue();
+        X = true; // Example value
+        Y = "ExampleString"; // Example value
         try
         {
-            // Create an object to store the variables
-            var data = new
+            var data = new SaveFileData
             {
-                Money,
-                Electricity,
-                Polution,
-                X,
-                Y
+                userId = _userId,
+                money = Money,
+                electricity = Electricity,
+                polution = Polution,
+                x = X,
+                y = Y
             };
+            Debug.Log("Saving data to JSON: " + JsonUtility.ToJson(data, true));
 
             string jsonData = JsonUtility.ToJson(data, true);
             File.WriteAllText(_filePath, jsonData);
@@ -83,17 +149,26 @@ public class saveToLocal : MonoBehaviour
     {
         SaveDataToJson();
 
-        // Sync local data to the database
-        var data = new
+        var data = new Sendtodb.UserDataPayload
         {
-            Money,
-            Electricity,
-            Polution,
-            X,
-            Y
+            userId = _userId,
+            money = Money,
+            electricity = Electricity,
+            polution = Polution,
+            x = X,
+            y = Y
         };
 
         Sendtodb dbSender = new Sendtodb();
-        dbSender.SendData("users", data);
+        dbSender.SendData("cityStats", _userId, data); // collectionName, userId, data
+    }
+
+    public string GetUserId()
+    {
+        return _userId;
     }
 }
+
+// ============================================================
+// Gemaakt door: Miro Vaassen
+// ============================================================
