@@ -40,7 +40,10 @@ public class saveToLocal : MonoBehaviour
         // Try to load userId from file, else generate and save
         LoadOrCreateUserId();
 
-        // Initialize variables
+        // Load saved values and set them in the managers
+        LoadStatsFromSave();
+
+        // Initialize variables (optional, will be overwritten by LoadStatsFromSave if file exists)
         Money = MoneyManager.Instance.GetCurrentValue();
         Electricity = PowerManager.Instance.GetCurrentValue();
         Polution = EmissionManager.Instance.GetCurrentValue();
@@ -66,6 +69,27 @@ public class saveToLocal : MonoBehaviour
         Debug.Log("Generated new userId: " + _userId);
         // Save immediately so it's persisted
         SaveDataToJson();
+    }
+
+    private void LoadStatsFromSave()
+    {
+        if (File.Exists(_filePath))
+        {
+            string jsonData = File.ReadAllText(_filePath);
+            SaveFileData loaded = JsonUtility.FromJson<SaveFileData>(jsonData);
+            if (loaded != null)
+            {
+                // Set values in managers if possible
+                if (MoneyManager.Instance != null)
+                    MoneyManager.Instance.money = loaded.money;
+                if (PowerManager.Instance != null)
+                    PowerManager.Instance.power = loaded.electricity;
+                if (EmissionManager.Instance != null)
+                    EmissionManager.Instance.emission = loaded.polution;
+
+                Debug.Log($"Loaded stats from save: money={loaded.money}, electricity={loaded.electricity}, polution={loaded.polution}");
+            }
+        }
     }
 
     public void SaveDataToJson()
