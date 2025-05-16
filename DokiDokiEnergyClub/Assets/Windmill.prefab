@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeAmount: 5
   addInterval: 2
+  emmisionAmount: {fileID: 0}
 --- !u!114 &4405498429758849632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,5 +116,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05819c64e4fe1748819e2fe0deb6950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeAmount: -1
-  addInterval: 1
+  changeAmount: 1
+  addInterval: 5
