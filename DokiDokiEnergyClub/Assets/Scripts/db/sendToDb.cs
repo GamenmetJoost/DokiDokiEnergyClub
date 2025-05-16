@@ -25,6 +25,7 @@ public class Sendtodb : MonoBehaviour
     [System.Serializable]
     public class UserDataPayload
     {
+        public string userId;
         public int money;
         public int electricity;
         public int polution;
@@ -36,22 +37,24 @@ public class Sendtodb : MonoBehaviour
     public class DbPayload
     {
         public string collectionName;
+        public string userId; // <-- toegevoegd
         public UserDataPayload data;
     }
 
-    public void SendData(string collectionName, UserDataPayload data)
+    public void SendData(string collectionName, string userId, UserDataPayload data)
     {
-        // Altijd posten naar /data endpoint
-        string url = _apiUrl; // _apiUrl = "https://mongodb.mirovaassen.nl/data"
+        string url = _apiUrl; // "https://mongodb.mirovaassen.nl/data"
         var payload = new DbPayload
         {
             collectionName = collectionName,
+            userId = userId,
             data = data
         };
 
         // Log de payload als object
         Debug.Log("Payload object:");
         Debug.Log($"collectionName: {payload.collectionName}");
+        Debug.Log($"userId: {payload.userId}");
         Debug.Log($"data.money: {payload.data.money}, data.electricity: {payload.data.electricity}, data.polution: {payload.data.polution}, data.x: {payload.data.x}, data.y: {payload.data.y}");
 
         string jsonData = JsonUtility.ToJson(payload, true);
