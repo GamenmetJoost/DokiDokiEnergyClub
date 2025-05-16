@@ -5,6 +5,7 @@ public class ImagePlacer : MonoBehaviour
     public GameObject imagePrefab;
     public float tileWidth = 3.2f;
     public float tileHeight = 1.6f;
+    public int placementCost = 10;
 
     private bool isPlacing = false;
 
@@ -14,15 +15,26 @@ public class ImagePlacer : MonoBehaviour
     {
         if (isPlacing && Input.GetMouseButtonDown(0))
         {
-            Vector3 worldPos = GetMouseWorldPositionOnPlane();
-            Vector2Int gridPos = WorldToIsoGrid(worldPos);
-            Vector3 snappedWorldPos = IsoGridToWorld(gridPos);
+            // Check if the player has enough money
+            if (MoneyManager.Instance != null && MoneyManager.Instance.GetCurrentValue() >= placementCost)
+            {
+                Vector3 worldPos = GetMouseWorldPositionOnPlane();
+                Vector2Int gridPos = WorldToIsoGrid(worldPos);
+                Vector3 snappedWorldPos = IsoGridToWorld(gridPos);
 
-            // Instantiate and configure rendering order
-            GameObject newTile = Instantiate(imagePrefab, snappedWorldPos, Quaternion.identity);
-            SetTileSortingOrder(newTile, gridPos);
+                // Instantiate and configure rendering order
+                GameObject newTile = Instantiate(imagePrefab, snappedWorldPos, Quaternion.identity);
+                SetTileSortingOrder(newTile, gridPos);
 
-            isPlacing = false;
+                // Subtract cost
+                MoneyManager.Instance.SubtractFromValue(placementCost);
+
+                isPlacing = false;
+            }
+            else
+            {
+                Debug.Log("Not enough money to place this tile.");
+            }
         }
     }
 
@@ -31,7 +43,6 @@ public class ImagePlacer : MonoBehaviour
         SpriteRenderer renderer = tile.GetComponent<SpriteRenderer>();
         if (renderer != null)
         {
-            // Higher (gridX + gridY) = further back = lower sorting order
             renderer.sortingOrder = -(gridPos.x + gridPos.y);
         }
         else
