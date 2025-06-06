@@ -61,8 +61,6 @@ public class Sendtodb : MonoBehaviour
         Debug.Log("JSON that will be sent to the server:");
         Debug.Log(jsonData);
 
-        SaveDataLocally(jsonData);
-
         Debug.Log("Attempting to send data to the server.");
         SendDataToServer(url, jsonData);
     }
@@ -88,21 +86,7 @@ public class Sendtodb : MonoBehaviour
             else
             {
                 Debug.LogError("Error sending data: " + request.error);
-                SaveDataLocally(jsonData);
             }
-        }
-    }
-
-    private void SaveDataLocally(string jsonData)
-    {
-        try
-        {
-            File.WriteAllText(_localFilePath, jsonData);
-            Debug.Log("Data saved locally due to failed server request.");
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError("Error saving data locally: " + ex.Message);
         }
     }
 }
