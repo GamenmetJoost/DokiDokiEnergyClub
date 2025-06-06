@@ -27,7 +27,7 @@ public class GetDataFromDb : MonoBehaviour
         if (string.IsNullOrEmpty(collectionName))
         {
             Debug.LogWarning("Collection name is empty. Using default test endpoint.");
-            collectionName = "test"; // Default to "test" collection
+            collectionName = "cityStats"; // Default to "test" collection
         }
 
         string url = $"{_apiUrl}/data/{collectionName}";
