@@ -29,8 +29,7 @@ public class Sendtodb : MonoBehaviour
         public int money;
         public int electricity;
         public int polution;
-        public bool x;
-        public string y;
+        public PrefabDataList prefabData; // <-- Add this line
     }
 
     [System.Serializable]
@@ -55,7 +54,11 @@ public class Sendtodb : MonoBehaviour
         Debug.Log("Payload object:");
         Debug.Log($"collectionName: {payload.collectionName}");
         Debug.Log($"userId: {payload.userId}");
-        Debug.Log($"data.money: {payload.data.money}, data.electricity: {payload.data.electricity}, data.polution: {payload.data.polution}, data.x: {payload.data.x}, data.y: {payload.data.y}");
+        Debug.Log($"data.money: {payload.data.money}, data.electricity: {payload.data.electricity}, data.polution: {payload.data.polution}, data.prefabData: {payload.data.prefabData}");
+        if (payload.data.prefabData != null && payload.data.prefabData.prefabs != null)
+            Debug.Log($"Prefab count: {payload.data.prefabData.prefabs.Length}");
+        else
+            Debug.Log("No prefab data in payload.");
 
         string jsonData = JsonUtility.ToJson(payload, true);
         Debug.Log("JSON that will be sent to the server:");

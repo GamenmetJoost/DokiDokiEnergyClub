@@ -164,12 +164,25 @@ public class saveToLocal : MonoBehaviour
     {
         SaveDataToJson();
 
+        // Fetch prefab data from PrefabSerializer
+        PrefabSerializer prefabSerializer = FindFirstObjectByType<PrefabSerializer>();
+        if (prefabSerializer != null)
+        {
+            prefabDataList = prefabSerializer.GetAllPrefabInstances();
+        }
+        else
+        {
+            Debug.LogWarning("PrefabSerializer component not found in the scene.");
+            prefabDataList = new PrefabDataList();
+        }
+
         var data = new Sendtodb.UserDataPayload
         {
             userId = _userId,
             money = Money,
             electricity = Electricity,
             polution = Polution,
+            prefabData = prefabDataList // <-- Add this line
         };
 
         Sendtodb dbSender = new Sendtodb();
