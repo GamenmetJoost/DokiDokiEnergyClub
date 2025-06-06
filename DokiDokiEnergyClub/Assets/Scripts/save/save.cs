@@ -12,7 +12,7 @@ public class save : MonoBehaviour
 
     void Start()
     {
-        saveLocal = FindObjectOfType<saveToLocal>();
+        saveLocal = FindFirstObjectByType<saveToLocal>();
         if (saveLocal == null)
         {
             Debug.LogWarning("saveToLocal component not found in the scene.");
