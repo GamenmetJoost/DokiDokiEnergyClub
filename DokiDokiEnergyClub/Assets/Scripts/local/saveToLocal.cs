@@ -13,12 +13,16 @@ public class saveToLocal : MonoBehaviour
     private string _filePath;
     private string _userId;
 
+    // Add static accessor for userId
+    public static string CurrentUserId { get; private set; }
+
     // New variables
     private int Money;
     private int Electricity;
     private int Polution;
-    private bool X;
-    private string Y;
+
+    // Add prefab data list
+    private PrefabDataList prefabDataList = new PrefabDataList();
 
     [System.Serializable]
     private class SaveFileData
@@ -27,8 +31,7 @@ public class saveToLocal : MonoBehaviour
         public int money;
         public int electricity;
         public int polution;
-        public bool x;
-        public string y;
+        public PrefabDataList prefabData; // Add this line
     }
 
     void Start()
@@ -47,8 +50,6 @@ public class saveToLocal : MonoBehaviour
         Money = MoneyManager.Instance.GetCurrentValue();
         Electricity = PowerManager.Instance.GetCurrentValue();
         Polution = EmissionManager.Instance.GetCurrentValue();
-        X = true; // Example value
-        Y = "ExampleString"; // Example value
     }
 
     private void LoadOrCreateUserId()
@@ -60,12 +61,14 @@ public class saveToLocal : MonoBehaviour
             if (!string.IsNullOrEmpty(loaded.userId))
             {
                 _userId = loaded.userId;
+                CurrentUserId = _userId; // Set static property
                 Debug.Log("Loaded userId from file: " + _userId);
                 return;
             }
         }
         // Generate new userId
         _userId = Guid.NewGuid().ToString();
+        CurrentUserId = _userId; // Set static property
         Debug.Log("Generated new userId: " + _userId);
         // Save immediately so it's persisted
         SaveDataToJson();
@@ -88,6 +91,8 @@ public class saveToLocal : MonoBehaviour
                     EmissionManager.Instance.emission = loaded.polution;
 
                 Debug.Log($"Loaded stats from save: money={loaded.money}, electricity={loaded.electricity}, polution={loaded.polution}");
+                // Load prefab data
+                prefabDataList = loaded.prefabData ?? new PrefabDataList();
             }
         }
     }
@@ -97,8 +102,19 @@ public class saveToLocal : MonoBehaviour
         Money = MoneyManager.Instance.GetCurrentValue();
         Electricity = PowerManager.Instance.GetCurrentValue();
         Polution = EmissionManager.Instance.GetCurrentValue();
-        X = true; // Example value
-        Y = "ExampleString"; // Example value
+
+        // Fetch prefab data from PrefabSerializer
+        PrefabSerializer prefabSerializer = FindFirstObjectByType<PrefabSerializer>();
+        if (prefabSerializer != null)
+        {
+            prefabDataList = prefabSerializer.GetAllPrefabInstances();
+        }
+        else
+        {
+            Debug.LogWarning("PrefabSerializer component not found in the scene.");
+            prefabDataList = new PrefabDataList();
+        }
+
         try
         {
             var data = new SaveFileData
@@ -107,8 +123,7 @@ public class saveToLocal : MonoBehaviour
                 money = Money,
                 electricity = Electricity,
                 polution = Polution,
-                x = X,
-                y = Y
+                prefabData = prefabDataList // Save prefab data in the same file
             };
             Debug.Log("Saving data to JSON: " + JsonUtility.ToJson(data, true));
 
@@ -155,12 +170,21 @@ public class saveToLocal : MonoBehaviour
             money = Money,
             electricity = Electricity,
             polution = Polution,
-            x = X,
-            y = Y
         };
 
         Sendtodb dbSender = new Sendtodb();
         dbSender.SendData("cityStats", _userId, data); // collectionName, userId, data
+    }
+
+    public void SetPrefabData(PrefabDataList data)
+    {
+        prefabDataList = data;
+        SaveDataToJson();
+    }
+
+    public PrefabDataList GetPrefabData()
+    {
+        return prefabDataList;
     }
 
     public string GetUserId()

@@ -45,13 +45,24 @@ public class checkJson : MonoBehaviour
             {
                 _userId = loaded.userId;
                 Debug.Log("Loaded userId from file: " + _userId);
-                FetchAndSaveDataFromDb(); 
+                FetchAndSaveDataFromDb();
                 return;
             }
         }
         else
         {
             Debug.LogError("Failed to find or create the local JSON file.");
+        }
+
+        // Load prefabs from JSON when the game starts
+        PrefabLoader prefabLoader = FindFirstObjectByType<PrefabLoader>();
+        if (prefabLoader != null)
+        {
+            prefabLoader.LoadPrefabsFromJson();
+        }
+        else
+        {
+            Debug.LogWarning("PrefabLoader component not found in the scene.");
         }
     }
 

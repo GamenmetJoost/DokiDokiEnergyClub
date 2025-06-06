@@ -1,13 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.IO;
 
 public class PrefabSerializer : MonoBehaviour
 {
-    public string fileName = "prefabsData.json";
-
-    // Auto-detect all objects with a specific tag or name pattern
-    public void SaveAllPrefabInstances()
+    // Returns the prefab data list instead of saving to file
+    public PrefabDataList GetAllPrefabInstances()
     {
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         List<PrefabData> savedPrefabs = new List<PrefabData>();
@@ -32,11 +29,6 @@ public class PrefabSerializer : MonoBehaviour
             savedPrefabs.Add(data);
         }
 
-        PrefabDataList list = new PrefabDataList { prefabs = savedPrefabs.ToArray() };
-
-        string json = JsonUtility.ToJson(list, true);
-        string path = Path.Combine(Application.persistentDataPath, fileName);
-        File.WriteAllText(path, json);
-        Debug.Log($"Saved {savedPrefabs.Count} prefabs to: {path}");
+        return new PrefabDataList { prefabs = savedPrefabs.ToArray() };
     }
 }

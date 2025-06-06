@@ -36,8 +36,9 @@ public class save : MonoBehaviour
 
     private IEnumerator SaveWithWait()
     {
-        // Start SaveDataToJson (synchronous, but for future async support)
+        // Start SaveDataToJson (now also saves prefab data)
         saveLocal.SaveDataToJson();
+        // No need to call PrefabSerializer separately
         // Wacht 1 frame zodat het bestand zeker geschreven is
         yield return null;
         // Daarna syncen naar database
