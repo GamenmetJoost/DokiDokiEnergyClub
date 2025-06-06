@@ -42,11 +42,16 @@ public class EmissionManager : MonoBehaviour
     {
         if (mainCamera == null) return;
 
-        // Map pollution from 0 (green) to 100 (red)
+        // Map pollution from 0 (dark green) to 2000 (brown)
         float t = Mathf.Clamp01(emission / 2000f);
-        Color backgroundColor = Color.Lerp(Color.green, Color.red, t);
+
+        Color darkGreen = new Color(0f, 0.3f, 0f);   // Dark green
+        Color brown = new Color(0.4f, 0.26f, 0.13f); // Brown
+
+        Color backgroundColor = Color.Lerp(darkGreen, brown, t);
         mainCamera.backgroundColor = backgroundColor;
     }
+
 
     public void AddToValue(int amount)
     {
