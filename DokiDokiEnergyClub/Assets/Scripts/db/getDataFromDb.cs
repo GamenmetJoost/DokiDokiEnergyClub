@@ -22,15 +22,15 @@ public class GetDataFromDb : MonoBehaviour
         Debug.Log("Local JSON file path: " + _localFilePath);
     }
 
-    public async Task<string> FetchData(string collectionName)
+    public async Task<string> FetchData(string collectionName, string userId)
     {
         if (string.IsNullOrEmpty(collectionName))
         {
             Debug.LogWarning("Collection name is empty. Using default test endpoint.");
-            collectionName = "cityStats"; // Default to "test" collection
+            collectionName = "cityStats"; // Default collection name
         }
 
-        string url = $"{_apiUrl}/data/{collectionName}";
+        string url = $"{_apiUrl}/data/{collectionName}/{userId}";
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             request.SetRequestHeader("Content-Type", "application/json");
