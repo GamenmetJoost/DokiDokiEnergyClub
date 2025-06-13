@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8631183c7e6da324ba85a3c2465ea6d6
+guid: 8b2cee25da630e1458d5a0e74ddf7f58
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8747906455133258649
-    second: Airpurifier-Icon_0
+      213: -8137702715833815742
+    second: NuclearPowerPlantv3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Airpurifier-Icon_0
+      name: NuclearPowerPlantv3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 200
+        width: 128
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 76c7f6d6d61399680800000000000000
-      internalID: -8747906455133258649
+      spriteID: 24d6efece72111f80800000000000000
+      internalID: -8137702715833815742
       vertices: []
       indices: 
       edges: []
@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      NuclearPowerPlantv3_0: -8137702715833815742
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b9520f7f2a185b840b9db19e0e85861d
+guid: 4277ce63af01aaf47a21b4ebd3c8b161
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8184579531467560950
-    second: CoalPowerPlantv4_0
+      213: 1996445183994151292
+    second: NuclearPowerPlantv2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CoalPowerPlantv4_0
+      name: NuclearPowerPlantv2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 48
+        width: 128
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6f79e0958b7759170800000000000000
-      internalID: 8184579531467560950
+      spriteID: c71c285315cc4bb10800000000000000
+      internalID: 1996445183994151292
       vertices: []
       indices: 
       edges: []
@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      NuclearPowerPlantv2_0: 1996445183994151292
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

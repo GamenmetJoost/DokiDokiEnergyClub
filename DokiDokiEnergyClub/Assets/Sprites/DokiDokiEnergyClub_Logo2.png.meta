@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fdfc74451d5a1be4682c8507a0c6565c
+guid: d956d0d2f106056469ee0c7a3acce709
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2888864596204097108
-    second: Windmill-Icon_0
+      213: 6933350569921442950
+    second: DokiDokiEnergyClub_Logo2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Windmill-Icon_0
+      name: DokiDokiEnergyClub_Logo2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 200
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 45e82fc5b0f471820800000000000000
-      internalID: 2888864596204097108
+      spriteID: 6847b6fdb95383060800000000000000
+      internalID: 6933350569921442950
       vertices: []
       indices: 
       edges: []
@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DokiDokiEnergyClub_Logo2_0: 6933350569921442950
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

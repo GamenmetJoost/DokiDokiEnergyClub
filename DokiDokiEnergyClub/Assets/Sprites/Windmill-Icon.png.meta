@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f496a6d2432495f4caff20f52878fc67
+guid: fdfc74451d5a1be4682c8507a0c6565c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3571905256549317394
-    second: House-Icon_0
+      213: 2888864596204097108
+    second: Windmill-Icon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: House-Icon_0
+      name: Windmill-Icon_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ee4070c081b0e6ec0800000000000000
-      internalID: -3571905256549317394
+      spriteID: 45e82fc5b0f471820800000000000000
+      internalID: 2888864596204097108
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      House-Icon_0: -3571905256549317394
+      Windmill-Icon_0: 2888864596204097108
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
